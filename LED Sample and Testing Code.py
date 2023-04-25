@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MIT
 import time;
 import board;
+import neopixel;
 from adafruit_circuitplayground import cp;
 
 # """This example turns on the little red LED."""
