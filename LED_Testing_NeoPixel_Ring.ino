@@ -60,7 +60,7 @@ void setup() {
 
 void loop() {
   //Checking to see if the forward sensor is being touched
-  if (digitalRead(TOUCH_FFWD)) == HIGH && millis() - last_time_touched > touch_debounce_delay) { //We're going to be using milliseconds to measure time 
+  if (digitalRead(TOUCH_FFWD) == HIGH && millis() - last_time_touched > touch_debounce_delay) { //We're going to be using milliseconds to measure time 
   // Cycle Colur Wheel Forward
   current_colour = (current_colour + 1) % 256;
   // Set all LEDs to the new colour
