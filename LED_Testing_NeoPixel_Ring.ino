@@ -73,15 +73,15 @@ void loop() {
 
 }
 //Checking to see if the backward sensor is being touched
- if (digitalRead(TOUCH_BCKWD)) == HIGH && millis() - last_time_touched > touch_debounce_delay) {
+ if (digitalRead(TOUCH_BCKWD) == HIGH && millis() - last_time_touched > touch_debounce_delay) {
    // Cycle Colour Wheel Backward 
    current_colour = (current_colour + 255) % 256;
    // Set all LEDs to the new colour
     for (int i = 0; i < NUM_LEDS; i++) {
-    strip.setPixelColor(i, strip.Colour(current_colour, 0, 0)); // This sets red as the default colour
+    strip.setPixelColor(i, strip.Color(current_colour, 0, 0)); // This sets red as the default colour
   }
   strip.show(); // Update the NeoPixel ring colour
-  strip.setBrightness(current_brightness * 2.55) //Convert brightness between 0 and 255
+  strip.setBrightness(current_brightness * 2.55); //Convert brightness between 0 and 255
   last_time_touched = millis(); // Update the last time sensor was touched. Milliseconds is the measurement
  }
  //Checking to see if the brightness should be adjusted on the FFWD Strip
