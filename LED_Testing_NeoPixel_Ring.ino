@@ -11,7 +11,7 @@
 #define CAPTOUCH_PIN 0  //capacitive touch pin
 #define TOUCH_FFWD 2  // Digital pin that cycles colour wheel forward
 #define TOUCH_BCKWD 3 // Digital pin that cycles colour wheel backward
-#define NUM_LEDS    12  //how many pixels total
+#define NUM_LEDS    24  //how many pixels total
 
 Adafruit_NeoPixel strip(NUM_LEDS, 6, NEO_GRB + NEO_KHZ800); // Initialize NeoPixel object
 
@@ -58,7 +58,7 @@ void setup() {
   strip.show(); // Turn all LEDs off
 }
 
-voic loop() {
+void loop() {
   //Checking to see if the forward sensor is being touched
   if (digitalRead(TOUCH_FFWD)) == HIGH && millis() - last_time_touched > touch_debounce_delay) { //We're going to be using milliseconds to measure time 
   // Cycle Colur Wheel Forward
