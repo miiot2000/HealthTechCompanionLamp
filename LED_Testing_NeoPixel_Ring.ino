@@ -86,7 +86,7 @@ void loop() {
  }
  //Checking to see if the brightness should be adjusted on the FFWD Strip
  if (millis() - last_time_touched > 5000) { // Setting is adjusted to the LED waiting 5 seconds before seeing if the LED needs to adjust its brightness
- int touch_value = touchRead(TOUCH_FFWD);
+ int touch_value = digitalRead(TOUCH_FFWD);
  int new_brightness = map (touch_value, 0, 1023, 0, 100); // Mapping the touch input to specific sensor
  new_brightness = new_brightness / brightness_increment * brightness_increment; // Round brightness to nearest increment
  if (new_brightness != current_brightness) { // When brightness is changed
@@ -96,7 +96,7 @@ void loop() {
  }
 //Checking to see if the brightness should be adjusted on the BCKWD Strip
  if (millis() - last_time_touched > 5000) { // Setting is adjusted to the LED waiting 5 seconds before seeing if the LED needs to adjust its brightness
- int touch_value = touchRead(TOUCH_BCKWD);
+ int touch_value = digitalRead(TOUCH_BCKWD);
  int new_brightness = map (touch_value, 0, 1023, 0, 100); // Mapping the touch input to specific sensor
  new_brightness = new_brightness / brightness_increment * brightness_increment; // Round brightness to nearest increment
  if (new_brightness != current_brightness) { // When brightness is changed
