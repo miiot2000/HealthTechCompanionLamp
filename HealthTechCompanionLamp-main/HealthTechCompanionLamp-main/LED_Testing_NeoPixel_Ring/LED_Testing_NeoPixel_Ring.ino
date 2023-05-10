@@ -60,15 +60,6 @@ double temperature = 0;
 
 
 void setup() {
-  // Serial.begin(115200);
-
-  // if (! qt_1.begin())  
-  //  Serial.println("Failed to begin qt on pin A1");
-  //  FastLED.addLeds<WS2812, NEOPIXEL_PIN, COLOR_ORDER>(leds, NUM_LEDS);  // Set up neopixels with FastLED
-  //  FastLED.setBrightness(BRIGHTNESS); // set global brightness
-  //  FastLED.setMaxPowerInVoltsAndMilliamps(3,350);  //Constrain FastLED's power usage
-  //  strip.begin();
-  //  strip.end();
 // Initialize the NeoPixel Ring
   strip.begin(); // Turn all LED on
   strip.show(); // Turn all LEDs off
@@ -149,49 +140,5 @@ if (!leftSideHeat && !rightSideHeat) {
 if (temperature < 0) {
   temperature = 0;
 }
-//   //Checking to see if the forward sensor is being touched
-//   if (digitalRead(TOUCH_FFWD) == HIGH && millis() - last_time_touched > touch_debounce_delay) { //We're going to be using milliseconds to measure time 
-//   // Cycle Colur Wheel Forward
-//   current_colour = (current_colour + 1) % 256;
-//   // Set all LEDs to the new colour
-//   for (int i = 0; i < NUM_LEDS; i++) {
-//     strip.setPixelColor(i, strip.Color(current_colour, 0, 0)); // This sets red as the default colour
-//   }
-//   strip.show(); // Update the NeoPixel ring colour
-//   strip.setBrightness(current_brightness * 2.55); //Convert brightness between 0 and 255
-//   last_time_touched = millis(); // Update the last time sensor was touched. Milliseconds is the measurement
 
-// }
-// //Checking to see if the backward sensor is being touched
-//  if (digitalRead(TOUCH_BCKWD) == HIGH && millis() - last_time_touched > touch_debounce_delay) {
-//    // Cycle Colour Wheel Backward 
-//    current_colour = (current_colour + 255) % 256;
-//    // Set all LEDs to the new colour
-//     for (int i = 0; i < NUM_LEDS; i++) {
-//     strip.setPixelColor(i, strip.Color(current_colour, 0, 0)); // This sets red as the default colour
-//   }
-//   strip.show(); // Update the NeoPixel ring colour
-//   strip.setBrightness(current_brightness * 2.55); //Convert brightness between 0 and 255
-//   last_time_touched = millis(); // Update the last time sensor was touched. Milliseconds is the measurement
-//  }
-//  //Checking to see if the brightness should be adjusted on the FFWD Strip
-//  if (millis() - last_time_touched > 1500) { // Setting is adjusted to the LED waiting 5 seconds before seeing if the LED needs to adjust its brightness
-//  int touch_value = digitalRead(TOUCH_FFWD);
-//  int new_brightness = map (touch_value, 0, 1023, 0, 100); // Mapping the touch input to specific sensor
-//  new_brightness = new_brightness / brightness_increment * brightness_increment; // Round brightness to nearest increment
-//  if (new_brightness != current_brightness) { // When brightness is changed
-//     strip.setBrightness(current_brightness * 2.55); // Convert brightness to a value between 0 and 255
-//     strip.show(); //Update NeoPixel Ring
-//     }
-//  }
-// //Checking to see if the brightness should be adjusted on the BCKWD Strip
-//  if (millis() - last_time_touched > 1500) { // Setting is adjusted to the LED waiting 5 seconds before seeing if the LED needs to adjust its brightness
-//  int touch_value = digitalRead(TOUCH_BCKWD);
-//  int new_brightness = map (touch_value, 0, 1023, 0, 100); // Mapping the touch input to specific sensor
-//  new_brightness = new_brightness / brightness_increment * brightness_increment; // Round brightness to nearest increment
-//  if (new_brightness != current_brightness) { // When brightness is changed
-//     strip.setBrightness(current_brightness * 2.55); // Convert brightness to a value between 0 and 255
-//     strip.show(); //Update NeoPixel Ring
-//  }
-//  }
 }
