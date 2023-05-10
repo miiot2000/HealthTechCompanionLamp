@@ -162,16 +162,42 @@ delay(1000);
 * (TX out of Arduino is Digital Pin 1)
 * (RX into Arduino is Digital Pin 0)
 */
+
+#include "RH_ASK.h";
+#include "SPI.h";
+
+#define RF_RECIEVER 11
+
+//Initalize colour, brightness, and temperature variables
+int colorPot = 0;
+int brightnessPot = 0;
+double temperature = 0;
 int incomingByte = 0;
+
+// Making an instance of the RH_ASK driver
+RH_ASK driver;
+
+
 void setup(){
-//2400 baud for the 434 model
-Serial.begin(2400);
+// Initialize driver
+driver.init();
+
+// Setting the RF Reciever Pin
+pinMode (RF_RECIEVER, OUTPUT);
+
+pixels.begin();
 }
-void loop(){
-// read in values, debug to computer
-if (Serial.available() > 0) {
-incomingByte = Serial.read();
-Serial.println(incomingByte, DEC);
-}
-incomingByte = 0;
-}
+void loop() {
+  // Read the potentiometer values
+  int brightnessPotValue = analogRead(BRIGHTNESS_POT_PIN);
+  int colorPotValue = analogRead(COLOR_POT_PIN);
+
+  // Map the potentiometer values to the appropriate range
+  brightness = map(brightnessPotValue, 0, 1023, 0, 255);
+  colorIndex = map(colorPotValue, 0, 1023, 0, NUM_PIXELS - 1);
+
+  // Read the temperature (temperature calculation code goes here)
+  temperature += TEMPERATURE_INCREMENT;
+
+  // Set the NeoPixel colors and brightness
+  for (int i = 0; i < NUM_PIXELS;
