@@ -6,6 +6,10 @@
 // Color Touch Pendant Tutorial: https://learn.adafruit.com/color-touch-pendant-necklace/introduction
 // Two neopixel rings connected on pin 1 will cycle through gradient colors when the pendant is touched.  For Gemma M0.
 
+/*
+* This 
+*/
+
 #include "Adafruit_NeoPixel.h";
 #include "RH_ASK.h";
 Adafruit_NeoPixel strip(NUM_LEDS, 6, NEO_GRB + NEO_KHZ800); // Initialize NeoPixel object
@@ -43,6 +47,7 @@ boolean rightSideHeat = false;
 // Initialize variables to store the temperature values of the heating pads
 double temperature = 0; 
 
+byte counter;
 
     
 
@@ -71,6 +76,10 @@ pinMode (TOUCH_RIGHT, INPUT);
 // Setting the heating pad pins to output mode
 pinMode (HEATING_PAD_LEFT, OUTPUT);
 pinMode (HEATING_PAD_RIGHT, OUTPUT);
+
+//2400 baud for the 434 model
+Serial.begin(2400);
+counter = 0;
 
 }
 
@@ -141,4 +150,31 @@ if (temperature < 0) {
   temperature = 0;
 }
 
+//send out to transmitter
+Serial.print(counter);
+counter++;
+delay(10);
+
+}
+
+
+// -------------------------------------------------------------------
+
+/*
+* Simple Receiver Code
+* (TX out of Arduino is Digital Pin 1)
+* (RX into Arduino is Digital Pin 0)
+*/
+int incomingByte = 0;
+void setup(){
+//2400 baud for the 434 model
+Serial.begin(2400);
+}
+void loop(){
+// read in values, debug to computer
+if (Serial.available() > 0) {
+incomingByte = Serial.read();
+Serial.println(incomingByte, DEC);
+}
+incomingByte = 0;
 }
