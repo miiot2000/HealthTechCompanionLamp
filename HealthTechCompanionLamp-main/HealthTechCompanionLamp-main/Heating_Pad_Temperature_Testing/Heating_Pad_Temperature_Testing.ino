@@ -33,14 +33,17 @@ pinMode (HEATING_PAD_LEFT, OUTPUT);
 pinMode (HEATING_PAD_RIGHT, OUTPUT);
 
 temperature = 0; 
+ int touchSensorLeft = digitalRead (TOUCH_LEFT);
+ int touchSensorRight = digitalRead (TOUCH_RIGHT);
+
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 // Reading the touch sensor values 
-  touchSensorLeft = digitalRead (TOUCH_LEFT);
-  touchSensorRight = digitalRead (TOUCH_RIGHT);
+  int touchSensorLeft = digitalRead (TOUCH_LEFT);
+  int touchSensorRight = digitalRead (TOUCH_RIGHT);
 
   // Checking to see if the left sensor is being touched and adjusting temperature accordingly 
   if (touchSensorLeft == HIGH) {
