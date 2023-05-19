@@ -1,3 +1,5 @@
+#include "Adafruit_NeoPixel.h";
+
 // Define Touch Sensors in the digital pins. This wil be your input value
 #define TOUCH_LEFT 2
 #define TOUCH_RIGHT 3
