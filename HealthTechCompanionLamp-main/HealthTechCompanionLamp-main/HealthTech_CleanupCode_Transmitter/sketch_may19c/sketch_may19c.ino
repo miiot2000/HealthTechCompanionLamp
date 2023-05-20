@@ -1,5 +1,6 @@
 #include "Adafruit_NeoPixel.h"
 #include "RH_ASK.h"
+#include "SPI.h"
 
 #define NUM_PIXELS 24 // how many pixels total
 #define COLOR_POT A0 // Analog pin that adjusts color like a color wheel
@@ -13,6 +14,7 @@
 #define COOLING_RATE 0.05 // Define the cooling rate per loop iteration
 
 Adafruit_NeoPixel strip(NUM_PIXELS, 6, NEO_GRB + NEO_KHZ800); // Initialize NeoPixel object
+RH_ASK driver;
 
 int potColorNum = 0; // Initialize variables to store the values of the potentiometer values
 int potBrightnessNum = 0;
@@ -30,7 +32,8 @@ void setup() {
   pinMode(HEATING_PAD_LEFT, OUTPUT); // Setting the heating pad pins to output mode
   pinMode(HEATING_PAD_RIGHT, OUTPUT);
 
-  Serial.begin(2400); // 2400 baud for the 434 model
+  Serial.begin(9600); // 2400 baud for the 434 model, Initialize serial communication
+  driver.init();
   counter = 0;
 }
 
@@ -89,9 +92,21 @@ void loop() {
     temperature = 0;
   }
 
-  // send out to transmitter
-  Serial.print(counter);
+  // Prepare the data packet to be transmitted
+  byte data[8];
+  data[0] = counter;
+  data[1] = colorIndex;
+  data[2] = brightness;
+  int temperatureInt = temperature * 10; // Convert temperature to integer value (multiply by 10 to keep decimal precision)
+  data[3] = temperatureInt >> 8; // Higher byte of temperature
+  data[4] = temperatureInt & 0xFF; // Lower byte of temperature
+
+  // Send data packet
+  driver.send(data, sizeof(data));
+  driver.waitPacketSent();
+
   counter++;
   delay(10);
 }
+
 
