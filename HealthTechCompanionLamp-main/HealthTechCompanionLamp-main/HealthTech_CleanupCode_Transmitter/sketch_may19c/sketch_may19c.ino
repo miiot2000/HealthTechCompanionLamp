@@ -13,7 +13,7 @@
 #define TEMPERATURE_INCREMENT 0.1 // Define the temperature increment value per loop iteration
 #define COOLING_RATE 0.05 // Define the cooling rate per loop iteration
 
-Adafruit_NeoPixel strip(NUM_PIXELS, 6, NEO_GRB + NEO_KHZ800); // Initialize NeoPixel object
+Adafruit_NeoPixel strip(NUM_PIXELS, 6, NEO_RGB + NEO_KHZ800); // Initialize NeoPixel object
 RH_ASK driver;
 
 int potColorNum = 0; // Initialize variables to store the values of the potentiometer values
