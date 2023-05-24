@@ -2,30 +2,35 @@
 #include <SPI.h>
 
 RH_ASK driver;
+
 byte data[8];
+int colorIndex = 0;
+int brightness = 0;
+double temperature = 0;
 
 void setup() {
-  Serial.begin(9600); // Initialize serial communication
-  driver.init();
+  Serial.begin(2400);
+  if (!driver.init())
+    Serial.println("Receiver initialization failed");
 }
 
 void loop() {
   if (driver.recv(data, sizeof(data))) {
     byte counter = data[0];
-    int colorIndex = data[1];
-    int brightness = data[2];
-    int temperatureInt = (data[3] << 8) | data[4]; // Combine the higher and lower byte of temperature
-    double temperature = temperatureInt / 10.0; // Convert temperature back to decimal value
+    colorIndex = data[1];
+    brightness = data[2];
+    int temperatureInt = (data[3] << 8) | data[4];
+    temperature = temperatureInt / 10.0;
 
-    // Process the received data as needed
-    Serial.print("Counter: ");
+    Serial.print("Received Counter: ");
     Serial.println(counter);
-    Serial.print("Color Index: ");
+    Serial.print("Received Color Index: ");
     Serial.println(colorIndex);
-    Serial.print("Brightness: ");
+    Serial.print("Received Brightness: ");
     Serial.println(brightness);
-    Serial.print("Temperature: ");
+    Serial.print("Received Temperature: ");
     Serial.println(temperature);
   }
 }
+
 
