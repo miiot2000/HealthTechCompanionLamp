@@ -6,7 +6,7 @@
 #define COLOR_POT A0
 #define BRIGHTNESS_POT A1
 
-Adafruit_NeoPixel strip(NUM_PIXELS, 6, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip(NUM_PIXELS, 2, NEO_GRB + NEO_KHZ800);
 RH_ASK driver;
 byte data[8];
 
