@@ -13,8 +13,8 @@
 #define TOUCH_RIGHT 3 // The pin where the right touch sensor will be the input for the right heating pad
 #define HEATING_PAD_LEFT 4 // The pin location of the left heating pad 
 #define HEATING_PAD_RIGHT 5 // The pin location of the right heating pad
-#define MAX_TEMPERATURE_CELSIUS 28 // The maximum temperature of the heating pads
-#define TEMPERATURE_INCREMENT 0.1 // The rate in which the temperature of the pads increase 
+#define MAX_TEMPERATURE_CELSIUS 35 // The maximum temperature of the heating pads
+#define TEMPERATURE_INCREMENT 1 // The rate in which the temperature of the pads increase 
 #define COOLING_RATE 0.05 // The rate of cooling of the heating pad
 
 Adafruit_NeoPixel strip(NUM_PIXELS, NEO_PIN, NEO_GRB + NEO_KHZ800);
@@ -40,7 +40,7 @@ void setup() {
   pinMode(HEATING_PAD_LEFT, OUTPUT);
   pinMode(HEATING_PAD_RIGHT, OUTPUT);
 
-  driver.init();
+  driver.init(); // Initalization of transmitter pin is PIN 12
   Serial.begin(2400);
   counter = 0;
 }
