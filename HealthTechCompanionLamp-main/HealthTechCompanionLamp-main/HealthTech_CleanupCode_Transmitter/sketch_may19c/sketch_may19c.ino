@@ -13,7 +13,7 @@
 #define TOUCH_RIGHT 3 // The pin where the right touch sensor will be the input for the right heating pad
 #define HEATING_PAD_LEFT 4 // The pin location of the left heating pad 
 #define HEATING_PAD_RIGHT 5 // The pin location of the right heating pad
-#define MAX_TEMPERATURE_CELSIUS 35 // The maximum temperature of the heating pads
+#define MAX_TEMPERATURE_CELSIUS 40 // The maximum temperature of the heating pads
 #define TEMPERATURE_INCREMENT 1 // The rate in which the temperature of the pads increase 
 #define COOLING_RATE 0.05 // The rate of cooling of the heating pad
 
@@ -101,23 +101,22 @@ void loop() {
   /*
   * If statements to turn on and off the heating pads
   */
-  if (touchSensorLeft == HIGH) {
+  if (touchSensorLeft == HIGH || touchSensorRight == HIGH) {
     digitalWrite(HEATING_PAD_LEFT, HIGH);
-    leftSideHeat = true;
-    temperature += TEMPERATURE_INCREMENT;
-  } else {
-    digitalWrite(HEATING_PAD_LEFT, LOW);
-    leftSideHeat = false;
-  }
-
-  if (touchSensorRight == HIGH) {
     digitalWrite(HEATING_PAD_RIGHT, HIGH);
+    
+    leftSideHeat = true;
     rightSideHeat = true;
     temperature += TEMPERATURE_INCREMENT;
   } else {
+    digitalWrite(HEATING_PAD_LEFT, LOW);
     digitalWrite(HEATING_PAD_RIGHT, LOW);
+
+    leftSideHeat = false;
     rightSideHeat = false;
+
   }
+
 
   /*
   * Ensuring temperature cannot be raised above 28 celsius
