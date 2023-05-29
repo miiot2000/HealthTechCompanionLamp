@@ -30,6 +30,8 @@ boolean rightSideHeat = false;
 double temperature = 0;
 byte counter;
 byte data[8];
+unsigned long touchActivationTime = 0; // Variable to store the timestamp when touch sensor is activated
+
 
 void setup() {
   strip.begin();
@@ -102,12 +104,15 @@ void loop() {
   * If statements to turn on and off the heating pads
   */
   if (touchSensorLeft == HIGH || touchSensorRight == HIGH) {
+    if (millis() - touchActivationTime >= 500) {
     digitalWrite(HEATING_PAD_LEFT, HIGH);
     digitalWrite(HEATING_PAD_RIGHT, HIGH);
     
     leftSideHeat = true;
     rightSideHeat = true;
     temperature += TEMPERATURE_INCREMENT;
+    }
+    touchActivationTime = millis();
   } else {
     digitalWrite(HEATING_PAD_LEFT, LOW);
     digitalWrite(HEATING_PAD_RIGHT, LOW);
